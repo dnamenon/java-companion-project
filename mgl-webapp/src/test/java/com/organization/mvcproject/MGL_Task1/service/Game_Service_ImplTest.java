@@ -1,4 +1,4 @@
-package com.organization.mvcproject.MGL_Task1.service;
+package com.organization.mvcproject.service;
 
 
 import java.util.ArrayList;
@@ -37,15 +37,15 @@ class Game_Service_ImplTest {
 	
 	
 	@Autowired
-	private Game_Service gameServiceUnderTest;
+	private GameService gameServiceUnderTest;
 	
 	private static Game testGame = createGame(1);
 	
 	private  static final String TEST_GENRE = "Test Genre";
 	private static Game createGame(Integer number) {
 		Game game = new Game();
-		 game.setGame_name("Testing Game Name " + String.valueOf(number));
-		 game.setGame_genre(TEST_GENRE);
+		 game.setGameName("Testing Game Name " + String.valueOf(number));
+		 game.setGameGenre(TEST_GENRE);
 		 return game;
 	}
 	

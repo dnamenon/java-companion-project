@@ -81,8 +81,8 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="currentGame in MGL_T1_ctrl.games">
-                                <td><span ng-bind="currentGame.game_name"></span></td>
-                                <td><span ng-bind="currentGame.game_genre"></span></td>
+                                <td><span ng-bind="currentGame.gameName"></span></td>
+                                <td><span ng-bind="currentGame.gameGenre"></span></td>
                                 <td>
                                 </td>
                             </tr>
