@@ -1,4 +1,4 @@
-package com.organization.mvcproject.service;
+package com.organization.mvcproject.app.service;
 
 
 import java.util.ArrayList;
@@ -25,7 +25,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.organization.mvcproject.MGL_Task1.model.Game;
+import com.organization.mvcproject.model.Game;
+import com.organization.mvcproject.service.GameService;
 import com.organization.mvcproject.config.MvcConfiguration;
 
 @RunWith(JUnitPlatform.class)
@@ -56,10 +57,10 @@ class Game_Service_ImplTest {
 	void saveGameServiceSavesAndUpdatesGame() {
 		if(gamesToRemoveAfterTest.isEmpty()) {
 			Game game = gameServiceUnderTest.saveGame(testGame);
-			Assertions.assertNotNull(game.getGame_id());
+			Assertions.assertNotNull(game.getGameId());
 			
 			//updates 
-			game.setGame_name("Testing Game Name Updated" );
+			game.setGameName("Testing Game Name Updated" );
 			testGame = gameServiceUnderTest.saveGame(game);
 			assertEquals(game, testGame);	
 			gamesToRemoveAfterTest.add(testGame);

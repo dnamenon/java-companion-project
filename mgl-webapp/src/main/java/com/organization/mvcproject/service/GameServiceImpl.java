@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.organization.mvcproject.MGL_Task1.model.Game;
+import com.organization.mvcproject.model.Game;
 
 
 
-
+@Service
 public class GameServiceImpl implements GameService {
 
 	/**
@@ -30,19 +30,19 @@ public class GameServiceImpl implements GameService {
 	private static List<Game> populateGames() {
 
 		Game game1 = new Game();
-		game1.setGame_id(++gameId);
-		game1.setGame_genre("Sport");
-		game1.setGame_name("Rocket League");
+		game1.setGameId(++gameId);
+		game1.setGameGenre("Sport");
+		game1.setGameName("Rocket League");
 
 		Game game2 = new Game();
-		game2.setGame_id(++gameId);
-		game2.setGame_genre("Shooter");
-		game2.setGame_name("Halo 3");
+		game2.setGameId(++gameId);
+		game2.setGameGenre("Shooter");
+		game2.setGameName("Halo 3");
 
 		Game game3 = new Game();
-		game3.setGame_id(++gameId);
-		game3.setGame_genre("MMORPG");
-		game3.setGame_name("Runescape");
+		game3.setGameId(++gameId);
+		game3.setGameGenre("MMORPG");
+		game3.setGameName("Runescape");
 
 		games.add(game1);
 		games.add(game2);
@@ -58,7 +58,7 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public Game saveGame(Game game) {
-		game.setGame_id(++gameId);
+		game.setGameId(++gameId);
 		games.add(game);
 		return game;
 	}
