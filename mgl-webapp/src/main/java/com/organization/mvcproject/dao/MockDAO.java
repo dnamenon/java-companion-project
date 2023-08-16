@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.organization.mvcproject.model.GameImpl;
 import com.organization.mvcproject.model.Game;
 
 public class MockDAO{
@@ -19,17 +20,17 @@ public class MockDAO{
 
 	private static List<Game> populateGames() {
 
-		Game game1 = new Game();
+		Game game1 = new GameImpl();
 		game1.setId(++gameId);
 		game1.setGenre("Sport");
 		game1.setName("Rocket League");
 
-		Game game2 = new Game();
+		Game game2 = new GameImpl();
 		game2.setId(++gameId);
 		game2.setGenre("Shooter");
 		game2.setName("Halo 3");
 
-		Game game3 = new Game();
+		Game game3 = new GameImpl();
 		game3.setId(++gameId);
 		game3.setGenre("MMORPG");
 		game3.setName("Runescape");

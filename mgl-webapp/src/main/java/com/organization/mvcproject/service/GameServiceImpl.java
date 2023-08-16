@@ -1,6 +1,6 @@
 package com.organization.mvcproject.service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -17,10 +17,12 @@ public class GameServiceImpl implements GameService {
 	
 	public GameServiceImpl() {
 		gameDAO = new MockDAO();
+	
 	}
 
 	
 	public List<Game> retrieveAllGames() {
+		
 		return gameDAO.getGames();
 	}
 
