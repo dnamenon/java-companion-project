@@ -3,12 +3,14 @@ package com.organization.mvcproject.dao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.lang.IllegalArgumentException;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
 
 import com.organization.mvcproject.model.GameImpl;
 import com.organization.mvcproject.model.Game;
 
-
+@Service
 public class MockDAO{
 	
 	
@@ -51,27 +53,22 @@ public class MockDAO{
 
 	
 	public Game saveGame(Game game) {
-		Game updated = updateGame(game);
+		Game existing = findGameById(game);
 		
-		if(updated == null) {
+		if(existing == null) {
 			game.setId(++gameId);
 			games.add(game);
 			return game;
 		}
 		
-		return updated;
+		updateGame(existing);
+		return existing;
 	}
 	
-	private Game updateGame(Game game) {
-		
-		return games.stream()
-			.filter(g -> Objects.equals(g.getId(), game.getId()))
-			.map(g -> {
-				g.setName(game.getName());
-				g.setGenre(game.getGenre());
-				return g;
-			}).findAny()
-			.orElse(null);
+	private void updateGame(Game game) {
+	    	games = games.stream()
+	    		    .map(g -> g.getId().equals(game.getId()) ? (GameImpl) game : g)
+	    		    .collect(Collectors.toList());
 	}
 	
 	public Game findGameById(Game game) {
