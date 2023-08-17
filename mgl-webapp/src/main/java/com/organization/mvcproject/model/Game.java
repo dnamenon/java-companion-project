@@ -3,35 +3,19 @@ package com.organization.mvcproject.model;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Game {
+public interface Game {
 
-	
-	private Long id;
-	private String name;
-	private String genre;
+	public Long getId(); 
 
-	public Long getId() {
-		return id;
-	}
+	public void setId(Long gameId);
 
-	public void setId(Long gameId) {
-		this.id = gameId;
-	}
+	public String getName();
 
-	public String getName() {
-		return name;
-	}
+	public void setName(String gameName) ;
 
-	public void setName(String gameName) {
-		this.name = gameName;
-	}
+	public String getGenre();
 
-	public String getGenre() {
-		return genre;
-	}
 
-	public void setGenre(String gameGenre) {
-		this.genre = gameGenre;
-	}
+	public void setGenre(String gameGenre);
 
 }
