@@ -62,7 +62,7 @@ public class MockDAO{
 		}
 		
 		updateGame(existing);
-		return existing;
+		return findGameById(game);
 	}
 	
 	private void updateGame(Game game) {
@@ -72,7 +72,7 @@ public class MockDAO{
 	}
 	
 	public Game findGameById(Game game) {
-		return games.stream()
+		return (game.getId() == null) ? null : games.stream()
 				.filter(g -> Objects.equals(g.getId(), game.getId()))
 				.findAny()
 				.orElse(null);
