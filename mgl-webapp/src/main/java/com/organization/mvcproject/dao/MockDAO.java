@@ -52,7 +52,7 @@ public class MockDAO{
 	}
 
 	
-	public Game saveGame(Game game) {
+	public Game saveOrUpdateGame(Game game) {
 		Game existing = findGameById(game);
 		
 		if(existing == null) {

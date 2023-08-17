@@ -67,7 +67,7 @@ public class GameAndReviewController {
 	
 	@RequestMapping(value = "/game", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> createGame(@RequestBody GameImpl game) {
-		gameService.saveGame(game);
+		gameService.saveOrUpdateGame(game);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 }

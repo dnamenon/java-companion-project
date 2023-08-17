@@ -29,8 +29,8 @@ public class GameServiceImpl implements GameService {
 	}
 
 	
-	public Game saveGame(Game game) {
-		return gameDAO.saveGame(game);
+	public Game saveOrUpdateGame(Game game) {
+		return gameDAO.saveOrUpdateGame(game);
 	}
 	
 	
