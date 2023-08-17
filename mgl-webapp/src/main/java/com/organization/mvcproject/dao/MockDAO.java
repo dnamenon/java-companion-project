@@ -3,9 +3,11 @@ package com.organization.mvcproject.dao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.lang.IllegalArgumentException;
 
 import com.organization.mvcproject.model.GameImpl;
 import com.organization.mvcproject.model.Game;
+
 
 public class MockDAO{
 	
@@ -49,31 +51,34 @@ public class MockDAO{
 
 	
 	public Game saveGame(Game game) {
-		game.setId(++gameId);
-		games.add(game);
-		return game;
-	}
-	
-	public boolean updateGame(Game game) {
+		Game updated = updateGame(game);
 		
-		if (!gameExists(game)) {
-			return false;
+		if(updated == null) {
+			game.setId(++gameId);
+			games.add(game);
+			return game;
 		}
 		
-		games.forEach(g -> {
-			if(Objects.equals(g.getId(), game.getId())) {
-				g.setName(game.getName());
-				g.setGenre(game.getGenre());
-			}
-		});
-		
-		return true;
-		
+		return updated;
 	}
 	
-	private boolean gameExists(Game game) {
+	private Game updateGame(Game game) {
+		
 		return games.stream()
-				.anyMatch(g -> Objects.equals(g.getId(), game.getId()));
+			.filter(g -> Objects.equals(g.getId(), game.getId()))
+			.map(g -> {
+				g.setName(game.getName());
+				g.setGenre(game.getGenre());
+				return g;
+			}).findAny()
+			.orElse(null);
+	}
+	
+	public Game findGameById(Game game) {
+		return games.stream()
+				.filter(g -> Objects.equals(g.getId(), game.getId()))
+				.findAny()
+				.orElse(null);
 		
 	}
 	

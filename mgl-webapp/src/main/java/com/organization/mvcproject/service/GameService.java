@@ -11,7 +11,7 @@ public interface GameService {
 
 	Game saveGame(Game game);
 	
-	boolean updateGame(Game game);
+	Game findGameById(Game game);
 	
 	boolean deleteGame(Game game);
 

@@ -31,12 +31,13 @@ public class GameServiceImpl implements GameService {
 		return gameDAO.saveGame(game);
 	}
 	
-	public boolean updateGame(Game game) {
-		
-		return gameDAO.updateGame(game);
-	}
 	
 	public boolean deleteGame(Game game) {
 		return gameDAO.deleteGame(game);
+	}
+
+
+	public Game findGameById(Game game) {
+		return gameDAO.findGameById(game);
 	}
 }
