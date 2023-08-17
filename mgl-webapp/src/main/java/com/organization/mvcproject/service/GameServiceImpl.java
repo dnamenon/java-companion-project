@@ -4,6 +4,7 @@ package com.organization.mvcproject.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.organization.mvcproject.dao.MockDAO;
 import com.organization.mvcproject.model.Game;
@@ -13,6 +14,7 @@ import com.organization.mvcproject.model.Game;
 @Service
 public class GameServiceImpl implements GameService {
 
+	@Autowired
 	private MockDAO gameDAO; 
 	
 	public GameServiceImpl() {
