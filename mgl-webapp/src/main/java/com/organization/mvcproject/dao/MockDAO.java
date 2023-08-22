@@ -52,23 +52,20 @@ public class MockDAO{
 	}
 
 	
-	public Game saveOrUpdateGame(Game game) {
-		Game existing = findGameById(game);
+	public Game saveGame(Game game) {
 		
-		if(existing == null) {
 			game.setId(++gameId);
 			games.add(game);
 			return game;
-		}
-		
-		updateGame(existing);
-		return findGameById(game);
+	
+
 	}
 	
-	private void updateGame(Game game) {
+	public Game updateGame(Game game) {
 	    	games = games.stream()
 	    		    .map(g -> g.getId().equals(game.getId()) ? (GameImpl) game : g)
 	    		    .collect(Collectors.toList());
+	    	return findGameById(game);
 	}
 	
 	public Game findGameById(Game game) {
@@ -79,8 +76,8 @@ public class MockDAO{
 		
 	}
 	
-	public boolean deleteGame(Game game) {
-		return games.removeIf(g -> Objects.equals(g.getId(), game.getId()));
+	public boolean deleteGame(Long gameId) {
+		return games.removeIf(g -> Objects.equals(g.getId(), gameId));
 		
 	}
 

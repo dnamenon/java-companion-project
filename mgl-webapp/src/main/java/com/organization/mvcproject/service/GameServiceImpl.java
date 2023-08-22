@@ -17,10 +17,6 @@ public class GameServiceImpl implements GameService {
 	@Autowired
 	private MockDAO gameDAO; 
 	
-	public GameServiceImpl() {
-		gameDAO = new MockDAO();
-	
-	}
 
 	
 	public List<Game> retrieveAllGames() {
@@ -29,13 +25,18 @@ public class GameServiceImpl implements GameService {
 	}
 
 	
-	public Game saveOrUpdateGame(Game game) {
-		return gameDAO.saveOrUpdateGame(game);
+	public Game saveGame(Game game) {
+		return gameDAO.saveGame(game);
+	}
+	
+	public Game updateGame(Game game) {
+		return gameDAO.updateGame(game);
 	}
 	
 	
-	public boolean deleteGame(Game game) {
-		return gameDAO.deleteGame(game);
+	
+	public boolean deleteGame(Long gameId) {
+		return gameDAO.deleteGame(gameId);
 	}
 
 

@@ -13,6 +13,7 @@ angular.module('MGL_Task1_app').controller('MGL_Task1_Controller',
 			self.fetchAllGames = function(){
 				MGL_Task1_Service.fetchAllGames().then(function(data) {
 					self.games = data;
+					self.resetForm();
 				});
 			}
 
@@ -20,6 +21,27 @@ angular.module('MGL_Task1_app').controller('MGL_Task1_Controller',
 				return MGL_Task1_Service.createGame(self.game).then( function() {
 				self.fetchAllGames();
 				});
+			}
+			
+			self.updateGame = function(){
+				return MGL_Task1_Service.updateGame(self.game).then( function() {
+				self.fetchAllGames();
+				});
+			}
+			
+			self.selectGame = function(toUpdate){
+				self.game = angular.copy(toUpdate)
+				
+			}
+			
+			self.resetForm = function(){
+				self.game = {}
+			}
+			
+			self.deleteGame = function(gameToDelete){
+				return MGL_Task1_Service.deleteGame(gameToDelete.id).then( function() {
+				 self.fetchAllGames(); 
+				});	
 			}
 
 			self.fetchAllGames();

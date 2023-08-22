@@ -9,10 +9,12 @@ public interface GameService {
 
 	List<Game> retrieveAllGames();
 
-	Game saveOrUpdateGame(Game game);
+	Game saveGame(Game game);
+	
+	Game updateGame(Game game);
 	
 	Game findGameById(Game game);
 	
-	boolean deleteGame(Game game);
+	boolean deleteGame(Long gameId);
 
 }
