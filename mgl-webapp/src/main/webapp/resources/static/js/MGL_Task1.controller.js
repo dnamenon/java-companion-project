@@ -1,5 +1,6 @@
 'use strict';
 
+
 angular.module('MGL_Task1_app').controller('MGL_Task1_Controller',
 		[ 'MGL_Task1_Service', function(MGL_Task1_Service) {
 			var self = this;
@@ -8,20 +9,56 @@ angular.module('MGL_Task1_app').controller('MGL_Task1_Controller',
 				name : '',
 				genre : ''
 			};
+			
+			class SortType {
+				constructor() {
+					this.asString = "default"
+	  			}
+	
+	  			getSorted() {
+	   			 return MGL_Task1_Service.fetchAllGames()
+	  			}
+			}
+
+			class ByGenre extends SortType{
+  				constructor() {
+    				super();
+    				this.asString = "genre"
+  				}
+
+  				getSorted() {
+    				return MGL_Task1_Service.fetchAllByGenre()
+  				}
+  			}
+  			
 			self.games = [];
+			
+			var sortType;
+			self.sortTypeString;
+			var defaultSort = new SortType();
+			var genreSort = new ByGenre();
+			
+			
+				
+			
 
 			self.fetchAllGames = function(){
-				MGL_Task1_Service.fetchAllGames().then(function(data) {
+				sortType.getSorted().then(function(data) {
 					self.games = data;
 					self.resetForm();
 				});
 			}
 			
-			self.fetchAllByGenre = function(){
-				MGL_Task1_Service.fetchAllByGenre().then(function(data) {
-					self.games = data;
-					self.resetForm();
-				});
+			self.sortDefault = function(){
+				sortType = defaultSort;
+				self.sortTypeString = sortType.asString;
+				self.fetchAllGames();
+			}
+			
+			self.sortByGenre = function(){
+				sortType = genreSort;
+				self.sortTypeString = sortType.asString;
+				self.fetchAllGames();
 			}
 
 			self.addGame = function(){
@@ -50,6 +87,8 @@ angular.module('MGL_Task1_app').controller('MGL_Task1_Controller',
 				 self.fetchAllGames(); 
 				});	
 			}
-
+			
+			
+			self.sortDefault();
 			self.fetchAllGames();
 		} ]);

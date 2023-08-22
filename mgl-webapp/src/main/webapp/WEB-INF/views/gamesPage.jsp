@@ -8,6 +8,7 @@
         <script src="resources/static/js/app.js" ></script>
         <script src="resources/static/js/MGL_Task1.service.js"></script>
         <script src="resources/static/js/MGL_Task1.controller.js"></script>
+       
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -117,8 +118,8 @@
                                 <th>Game Name</th>
                                 <th>Game Genre</th>
                                 <th width="20%"></th>
-                                <th><button data-ng-click = "MGL_T1_ctrl.fetchAllByGenre()" class="btn btn-secondary btn-sm">Sort By Genre</button></th>
-                                 <th><button data-ng-click = "MGL_T1_ctrl.fetchAllGames()" class="btn btn-secondary btn-sm">Reset Order</button></th>
+                                <th data-ng-if="MGL_T1_ctrl.sortTypeString != 'genre'"><button data-ng-click = "MGL_T1_ctrl.sortByGenre()" class="btn btn-secondary btn-sm">Sort By Genre</button></th>
+                                 <th data-ng-if="MGL_T1_ctrl.sortTypeString != 'default'"><button data-ng-click = "MGL_T1_ctrl.sortDefault();" class="btn btn-secondary btn-sm">Reset Order</button></th>
                             </tr>
                         </thead>
                         <tbody>
