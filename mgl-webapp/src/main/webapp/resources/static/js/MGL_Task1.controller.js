@@ -10,7 +10,7 @@ angular.module('MGL_Task1_app').controller('MGL_Task1_Controller',
 				genre : ''
 			};
 			
-			class SortType {
+			class ById {
 				constructor() {
 					this.asString = "default"
 	  			}
@@ -20,9 +20,8 @@ angular.module('MGL_Task1_app').controller('MGL_Task1_Controller',
 	  			}
 			}
 
-			class ByGenre extends SortType{
+			class ByGenre {
   				constructor() {
-    				super();
     				this.asString = "genre"
   				}
 
@@ -35,7 +34,7 @@ angular.module('MGL_Task1_app').controller('MGL_Task1_Controller',
 			
 			var sortType;
 			self.sortTypeString;
-			var defaultSort = new SortType();
+			var defaultSort = new ById();
 			var genreSort = new ByGenre();
 			
 			
