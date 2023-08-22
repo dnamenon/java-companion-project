@@ -112,7 +112,10 @@ class Game_Service_ImplTest {
 	
 	@Test
 	void retrieveGamesByGenre() {
-		fail("Not yet implemented.");
+		List<Game> byGenre = gameServiceUnderTest.retrieveGamesByGenre();
+		for(int i = 1; i < byGenre.size(); i++) {
+			assertTrue(byGenre.get(i-1).getGenre().compareTo(byGenre.get(i).getGenre()) <= 0);
+		}
 	}
 	
 	

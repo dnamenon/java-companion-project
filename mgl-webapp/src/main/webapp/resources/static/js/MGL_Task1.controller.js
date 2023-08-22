@@ -16,6 +16,13 @@ angular.module('MGL_Task1_app').controller('MGL_Task1_Controller',
 					self.resetForm();
 				});
 			}
+			
+			self.fetchAllByGenre = function(){
+				MGL_Task1_Service.fetchAllByGenre().then(function(data) {
+					self.games = data;
+					self.resetForm();
+				});
+			}
 
 			self.addGame = function(){
 				return MGL_Task1_Service.createGame(self.game).then( function() {

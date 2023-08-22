@@ -65,6 +65,12 @@ public class GameAndReviewController {
 	public ResponseEntity<List<Game>> fetchAllGames() {
 		return new ResponseEntity<List<Game>>(gameService.retrieveAllGames(), HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/game/byGenre", method = RequestMethod.GET)
+	public ResponseEntity<List<Game>> fetchAllByGenre() {
+		return new ResponseEntity<List<Game>>(gameService.retrieveGamesByGenre(), HttpStatus.OK);
+	}
+
 
 	
 	@RequestMapping(value = "/game/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

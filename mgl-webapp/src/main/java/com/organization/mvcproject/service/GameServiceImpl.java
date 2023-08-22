@@ -43,4 +43,10 @@ public class GameServiceImpl implements GameService {
 	public Game findGameById(Game game) {
 		return gameDAO.findGameById(game);
 	}
+	
+	
+	public List<Game> retrieveGamesByGenre() {
+		
+		return gameDAO.getGamesByGenre();
+	}
 }

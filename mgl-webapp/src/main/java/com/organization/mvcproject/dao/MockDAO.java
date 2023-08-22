@@ -81,5 +81,12 @@ public class MockDAO{
 		
 	}
 
+
+	public List<Game> getGamesByGenre() {
+		return games.stream()
+				.sorted((g1, g2) -> (g1.getGenre()).compareTo(g2.getGenre()))
+				.collect(Collectors.toList());
+	}
+
 	
 }

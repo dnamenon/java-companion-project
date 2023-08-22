@@ -117,6 +117,8 @@
                                 <th>Game Name</th>
                                 <th>Game Genre</th>
                                 <th width="20%"></th>
+                                <th><button data-ng-click = "MGL_T1_ctrl.fetchAllByGenre()" class="btn btn-secondary btn-sm">Sort By Genre</button></th>
+                                 <th><button data-ng-click = "MGL_T1_ctrl.fetchAllGames()" class="btn btn-secondary btn-sm">Reset Order</button></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -125,7 +127,7 @@
                                 <td><span ng-bind="currentGame.genre"></span></td>
                                 <td>
                                 </td>
-                                <td><button data-ng-click = "MGL_T1_ctrl.selectGame(currentGame)" >Select</button> </td>
+                                <td><button data-ng-click = "MGL_T1_ctrl.selectGame(currentGame)" class="btn btn-secondary btn-sm" >Select</button> </td>
                                 <td><button data-ng-click="MGL_T1_ctrl.deleteGame(currentGame)" class="btn btn-secondary btn-sm">Delete</button></td>
                             </tr>
                         </tbody>

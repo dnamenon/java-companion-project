@@ -16,5 +16,7 @@ public interface GameService {
 	Game findGameById(Game game);
 	
 	boolean deleteGame(Long gameId);
+	
+	List<Game> retrieveGamesByGenre();
 
 }
