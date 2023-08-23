@@ -10,6 +10,7 @@ angular.module('MGL_Task1_app').controller('MGL_Task1_Controller',
 				genre : ''
 			};
 			
+			
 			class ById {
 				constructor() {
 					this.asString = "default"
@@ -38,7 +39,8 @@ angular.module('MGL_Task1_app').controller('MGL_Task1_Controller',
 			var genreSort = new ByGenre();
 			
 			
-				
+			self.nameSearchTerm = '';
+			
 			
 
 			self.fetchAllGames = function(){
@@ -59,6 +61,19 @@ angular.module('MGL_Task1_app').controller('MGL_Task1_Controller',
 				self.sortTypeString = sortType.asString;
 				self.fetchAllGames();
 			}
+			
+			self.searchByName = function(){
+				return MGL_Task1_Service.fetchAllSearchedByName(self.nameSearchTerm).then(function(data){
+						self.games = data;
+				});
+				
+			}
+			
+			self.resetSearch = function(){
+				self.nameSearchTerm = '';
+				self.fetchAllGames();
+			}
+			
 
 			self.addGame = function(){
 				return MGL_Task1_Service.createGame(self.game).then( function() {

@@ -9,7 +9,8 @@ angular.module('MGL_Task1_app').factory('MGL_Task1_Service', ['$http', function(
 			createGame : createGame,
 			updateGame : updateGame,
 			deleteGame : deleteGame,
-			fetchAllByGenre : fetchAllByGenre
+			fetchAllByGenre : fetchAllByGenre,
+			fetchAllSearchedByName: fetchAllSearchedByName
 		};
 
 		return factory;
@@ -25,6 +26,14 @@ angular.module('MGL_Task1_app').factory('MGL_Task1_Service', ['$http', function(
 		function fetchAllByGenre() {
 			return $http.get(REST_SERVICE_URI + "byGenre").then(function(response) {
 				
+					return response.data;
+				}
+			);
+		}
+		
+		function fetchAllSearchedByName(nameSearchTerm) {
+			return $http.post(REST_SERVICE_URI + "nameSearch", nameSearchTerm).then(function(response) {
+					
 					return response.data;
 				}
 			);

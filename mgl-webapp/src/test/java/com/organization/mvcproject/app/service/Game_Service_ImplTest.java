@@ -94,7 +94,7 @@ class Game_Service_ImplTest {
 	
 	@Test
 	void findGameByIdReturnsTheGame() {
-		Game game = gameServiceUnderTest.findGameById(testGame);
+		Game game = gameServiceUnderTest.findGameById(testGame).orElse(null);
 		assertNotNull(game);
 		assertEquals(game, testGame);
 	}

@@ -3,6 +3,7 @@ package com.organization.mvcproject.dao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -45,6 +46,12 @@ public class MockDAO{
 
 		return games;
 	}
+	
+	private class MissingGameException extends RuntimeException { 
+	    public MissingGameException() {
+	        super("Game not found");
+	    }
+	}
 
 	
 	public List<Game> getGames() {
@@ -65,14 +72,13 @@ public class MockDAO{
 	    	games = games.stream()
 	    		    .map(g -> g.getId().equals(game.getId()) ? (GameImpl) game : g)
 	    		    .collect(Collectors.toList());
-	    	return findGameById(game);
+	    	return findGameById(game).orElseThrow(MissingGameException::new);
 	}
 	
-	public Game findGameById(Game game) {
+	public Optional<Game> findGameById(Game game) {
 		return (game.getId() == null) ? null : games.stream()
 				.filter(g -> Objects.equals(g.getId(), game.getId()))
-				.findAny()
-				.orElse(null);
+				.findAny();
 		
 	}
 	
@@ -86,6 +92,13 @@ public class MockDAO{
 		return games.stream()
 				.sorted((g1, g2) -> (g1.getGenre()).compareTo(g2.getGenre()))
 				.collect(Collectors.toList());
+	}
+	
+	public List<Game> searchByName(String searchTerm){
+		return games.stream()
+				.filter(g -> g.getName().contains(searchTerm))
+				.collect(Collectors.toList());
+		
 	}
 
 	

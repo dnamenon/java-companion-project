@@ -70,6 +70,12 @@ public class GameAndReviewController {
 	public ResponseEntity<List<Game>> fetchAllByGenre() {
 		return new ResponseEntity<List<Game>>(gameService.retrieveGamesByGenre(), HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/game/nameSearch", method = RequestMethod.POST)
+	public ResponseEntity<List<Game>> fetchAllSearchedByName(@RequestBody String nameSearchTerm) {
+		return new ResponseEntity<List<Game>>(gameService.searchByName(nameSearchTerm), HttpStatus.OK);
+	}
+
 
 
 	

@@ -117,6 +117,10 @@
                             <tr>
                                 <th>Game Name</th>
                                 <th>Game Genre</th>
+                                <th> Search Games by Name: <form ng-submit="MGL_T1_ctrl.searchByName()" name="nameSearchForm" class="form-horizontal"> 
+                                <input type="text" ng-model="MGL_T1_ctrl.nameSearchTerm" class="form-control input-sm" placeholder="Enter the name of the game" />	
+                                <input type="submit" value="Search" class="btn btn-primary btn-sm">  <button data-ng-if="MGL_T1_ctrl.nameSearchTerm != ''" data-ng-click="MGL_T1_ctrl.resetSearch()" type="reset" class="btn btn-primary btn-sm">Clear</button>												
+                                </form> </th>
                                 <th width="20%"></th>
                                 <th data-ng-if="MGL_T1_ctrl.sortTypeString != 'genre'"><button data-ng-click = "MGL_T1_ctrl.sortByGenre()" class="btn btn-secondary btn-sm">Sort By Genre</button></th>
                                  <th data-ng-if="MGL_T1_ctrl.sortTypeString != 'default'"><button data-ng-click = "MGL_T1_ctrl.sortDefault();" class="btn btn-secondary btn-sm">Reset Order</button></th>
