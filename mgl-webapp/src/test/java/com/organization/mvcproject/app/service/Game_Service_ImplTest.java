@@ -7,6 +7,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -63,7 +64,7 @@ class Game_Service_ImplTest {
 			
 			//updates 
 			game.setName("Testing Game Name Updated" );
-			testGame = gameServiceUnderTest.saveGame(game);
+			testGame = gameServiceUnderTest.updateGame(game);
 		
 			assertEquals(game, testGame);	
 			gamesToRemoveAfterTest.add(testGame);
@@ -81,7 +82,8 @@ class Game_Service_ImplTest {
 		if(!gamesToRemoveAfterTest.isEmpty()) {
 			for(Game toRemove: gamesToRemoveAfterTest) {
 				
-				assertTrue(gameServiceUnderTest.deleteGame(toRemove));
+				assertTrue(gameServiceUnderTest.deleteGame(toRemove.getId()));
+				assertNull(gameServiceUnderTest.findGameById(toRemove));
 				numRemoved++;
 			}
 		}
@@ -92,7 +94,7 @@ class Game_Service_ImplTest {
 	
 	@Test
 	void findGameByIdReturnsTheGame() {
-		Game game = gameServiceUnderTest.findGameById(testGame);
+		Game game = gameServiceUnderTest.findGameById(testGame).orElse(null);
 		assertNotNull(game);
 		assertEquals(game, testGame);
 	}
@@ -110,7 +112,10 @@ class Game_Service_ImplTest {
 	
 	@Test
 	void retrieveGamesByGenre() {
-		fail("Not yet implemented.");
+		List<Game> byGenre = gameServiceUnderTest.retrieveGamesByGenre();
+		for(int i = 1; i < byGenre.size(); i++) {
+			assertTrue(byGenre.get(i-1).getGenre().compareTo(byGenre.get(i).getGenre()) <= 0);
+		}
 	}
 	
 	

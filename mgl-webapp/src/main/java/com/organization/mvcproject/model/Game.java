@@ -2,20 +2,19 @@ package com.organization.mvcproject.model;
 
 import org.springframework.stereotype.Component;
 
-@Component
+
 public interface Game {
 
-	public Long getId(); 
+	 Long getId(); 
 
-	public void setId(Long gameId);
+	 void setId(Long gameId);
 
-	public String getName();
+	 String getName();
 
-	public void setName(String gameName) ;
+	 void setName(String gameName) ;
 
-	public String getGenre();
+	 String getGenre();
 
-
-	public void setGenre(String gameGenre);
+	 void setGenre(String gameGenre);
 
 }

@@ -1,6 +1,7 @@
 package com.organization.mvcproject.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.organization.mvcproject.model.Game;
 
@@ -11,8 +12,14 @@ public interface GameService {
 
 	Game saveGame(Game game);
 	
-	Game findGameById(Game game);
+	Game updateGame(Game game);
 	
-	boolean deleteGame(Game game);
+	Optional<Game> findGameById(Game game);
+	
+	boolean deleteGame(Long gameId);
+	
+	List<Game> retrieveGamesByGenre();
+	
+	List<Game> searchByName(String searchTerm);
 
 }

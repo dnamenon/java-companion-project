@@ -6,20 +6,58 @@ angular.module('MGL_Task1_app').factory('MGL_Task1_Service', ['$http', function(
 
 		var factory = {
 			fetchAllGames : fetchAllGames,
-			createGame : createGame
+			createGame : createGame,
+			updateGame : updateGame,
+			deleteGame : deleteGame,
+			fetchAllByGenre : fetchAllByGenre,
+			fetchAllSearchedByName: fetchAllSearchedByName
 		};
 
 		return factory;
 
 		function fetchAllGames() {
-			return $http.get('game').then(function(response) {
+			return $http.get(REST_SERVICE_URI).then(function(response) {
+				
+					return response.data;
+				}
+			);
+		}
+		
+		function fetchAllByGenre() {
+			return $http.get(REST_SERVICE_URI + "byGenre").then(function(response) {
+				
+					return response.data;
+				}
+			);
+		}
+		
+		function fetchAllSearchedByName(nameSearchTerm) {
+			return $http.post(REST_SERVICE_URI + "nameSearch", nameSearchTerm).then(function(response) {
+					
 					return response.data;
 				}
 			);
 		}
 
 		function createGame(game) {
-			return $http.post('game', game).then(function(response) {
+			return $http.post(REST_SERVICE_URI + "create", game).then(function(response) {
+					console.log(response);
+					return response.data;
+				}
+			);
+		}
+		
+		function updateGame(game) {
+			return $http.put(REST_SERVICE_URI +"update", game).then(function(response) {
+					console.log(response);
+					return response.data;
+				}
+			);
+		}
+		
+		function deleteGame(gameId) {
+			return $http.delete(REST_SERVICE_URI + gameId).then(function(response) {
+					console.log(response.data);
 					return response.data;
 				}
 			);

@@ -2,6 +2,7 @@ package com.organization.mvcproject.service;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,6 @@ public class GameServiceImpl implements GameService {
 	@Autowired
 	private MockDAO gameDAO; 
 	
-	public GameServiceImpl() {
-		gameDAO = new MockDAO();
-	
-	}
 
 	
 	public List<Game> retrieveAllGames() {
@@ -33,13 +30,29 @@ public class GameServiceImpl implements GameService {
 		return gameDAO.saveGame(game);
 	}
 	
+	public Game updateGame(Game game) {
+		return gameDAO.updateGame(game);
+	}
 	
-	public boolean deleteGame(Game game) {
-		return gameDAO.deleteGame(game);
+	
+	
+	public boolean deleteGame(Long gameId) {
+		return gameDAO.deleteGame(gameId);
 	}
 
 
-	public Game findGameById(Game game) {
+	public Optional<Game> findGameById(Game game) {
 		return gameDAO.findGameById(game);
+	}
+	
+	
+	public List<Game> retrieveGamesByGenre() {
+		
+		return gameDAO.getGamesByGenre();
+	}
+	
+	public List<Game> searchByName(String searchTerm) {
+		
+		return gameDAO.searchByName(searchTerm);
 	}
 }

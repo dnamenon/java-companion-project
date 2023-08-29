@@ -3,12 +3,15 @@ package com.organization.mvcproject.dao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.lang.IllegalArgumentException;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
 
 import com.organization.mvcproject.model.GameImpl;
 import com.organization.mvcproject.model.Game;
 
-
+@Service
 public class MockDAO{
 	
 	
@@ -43,6 +46,12 @@ public class MockDAO{
 
 		return games;
 	}
+	
+	private class MissingGameException extends RuntimeException { 
+	    public MissingGameException() {
+	        super("Game not found");
+	    }
+	}
 
 	
 	public List<Game> getGames() {
@@ -51,39 +60,44 @@ public class MockDAO{
 
 	
 	public Game saveGame(Game game) {
-		Game updated = updateGame(game);
 		
-		if(updated == null) {
 			game.setId(++gameId);
 			games.add(game);
 			return game;
-		}
-		
-		return updated;
+	
+
 	}
 	
-	private Game updateGame(Game game) {
-		
-		return games.stream()
-			.filter(g -> Objects.equals(g.getId(), game.getId()))
-			.map(g -> {
-				g.setName(game.getName());
-				g.setGenre(game.getGenre());
-				return g;
-			}).findAny()
-			.orElse(null);
+	public Game updateGame(Game game) {
+	    	games = games.stream()
+	    		    .map(g -> g.getId().equals(game.getId()) ? (GameImpl) game : g)
+	    		    .collect(Collectors.toList());
+	    	return findGameById(game).orElseThrow(MissingGameException::new);
 	}
 	
-	public Game findGameById(Game game) {
-		return games.stream()
+	public Optional<Game> findGameById(Game game) {
+		return (game.getId() == null) ? null : games.stream()
 				.filter(g -> Objects.equals(g.getId(), game.getId()))
-				.findAny()
-				.orElse(null);
+				.findAny();
 		
 	}
 	
-	public boolean deleteGame(Game game) {
-		return games.removeIf(g -> Objects.equals(g.getId(), game.getId()));
+	public boolean deleteGame(Long gameId) {
+		return games.removeIf(g -> Objects.equals(g.getId(), gameId));
+		
+	}
+
+
+	public List<Game> getGamesByGenre() {
+		return games.stream()
+				.sorted((g1, g2) -> (g1.getGenre()).compareTo(g2.getGenre()))
+				.collect(Collectors.toList());
+	}
+	
+	public List<Game> searchByName(String searchTerm){
+		return games.stream()
+				.filter(g -> g.getName().contains(searchTerm))
+				.collect(Collectors.toList());
 		
 	}
 
